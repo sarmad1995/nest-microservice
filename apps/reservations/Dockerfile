@@ -3,7 +3,6 @@ FROM node:alpine As development
 WORKDIR /usr/src/app
 
 COPY package.json ./
-COPY yarn.lock ./
 COPY tsconfig.json tsconfig.json
 COPY nest-cli.json nest-cli.json
 
@@ -25,9 +24,8 @@ WORKDIR /usr/src/app
 COPY package.json ./
 COPY yarn.lock ./
 
-RUN npm install -g pnpm
 
-RUN yarn install
+RUN yarn install --prod
 
 COPY --from=development /usr/src/app/dist ./dist
 
